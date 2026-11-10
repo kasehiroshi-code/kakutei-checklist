@@ -142,6 +142,13 @@ button{font-family:inherit;cursor:pointer}
 .mailto .mt-h{font-weight:700;color:var(--info);font-size:14px;margin-bottom:2px}
 .mailto p{margin:2px 0}
 .mailto .mt-note{font-size:13px;color:var(--sub);margin-top:6px}
+.sq{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:10px;background:#fff;transition:outline .2s}
+.sq.flash{outline:3px solid var(--bad);outline-offset:2px}
+.sq-h{font-weight:700;margin-bottom:8px}
+.sq-n{display:inline-block;background:var(--grad);color:#fff;border-radius:6px;font-size:12px;padding:1px 8px;margin-right:8px}
+.tiles.two{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.tile .box.rd{border-radius:50%}
+.pcbox{border:1px solid var(--line);background:var(--input-bg);border-radius:10px;padding:12px 14px;margin-top:12px}
 .linebox{border:1px solid #bfe8cf;background:#f1fbf5;border-radius:10px;padding:12px 14px;margin-top:12px}
 .lb-h{font-weight:700;color:#06893f;font-size:14px;margin-bottom:6px}
 .linebtn{display:inline-flex;align-items:center;gap:8px;background:#06c755;color:#fff;border:none;border-radius:10px;padding:12px 22px;font-size:15px;font-weight:700;box-shadow:0 4px 12px rgba(6,199,85,.25)}
@@ -206,7 +213,7 @@ footer b{color:var(--info)}
   <ol>
     <li><button type="button" data-go="1"><span class="n">1</span>はじめの質問</button></li>
     <li><button type="button" data-go="2"><span class="n">2</span>書類を集める</button></li>
-    <li><button type="button" data-go="3"><span class="n">3</span>保存して送る</button></li>
+    <li><button type="button" data-go="3"><span class="n">3</span>送り方・送信</button></li>
   </ol>
   <div class="progline"><i id="progLine"></i></div>
 </nav>
@@ -248,7 +255,7 @@ footer b{color:var(--info)}
 <!-- STEP 2 -->
 <section class="panel" id="p2">
   <div id="alerts"></div>
-  <div class="done-banner" id="doneBanner">すべての書類の確認が終わりました。ありがとうございます！ 次は「3 保存して送る」へお進みください。</div>
+  <div class="done-banner" id="doneBanner">すべての書類の確認が終わりました。ありがとうございます！ 次は「3 送り方・送信」へお進みください。</div>
 
   <div class="card">
     <div class="summary">
@@ -272,43 +279,61 @@ footer b{color:var(--info)}
 
   <div class="navbtns">
     <button type="button" class="ghost" data-go="1">← 質問に戻る</button>
-    <button type="button" class="primary" data-go="3">保存して送る →</button>
+    <button type="button" class="primary" data-go="3">送り方の入力へ →</button>
   </div>
 </section>
 
 <!-- STEP 3 -->
 <section class="panel" id="p3">
-  <div class="card">
-    <h2>チェックリストを保存して、書類と一緒にお送りください</h2>
+  <div class="card" id="sendCard">
+    <h2>最後に、書類の送り方を教えてください</h2>
     <div class="sendsum">
       <div class="kpi"><div class="l">ご用意いただく書類</div><div class="v" id="kTotal">0<small> 点</small></div></div>
       <div class="kpi ok"><div class="l">準備できた</div><div class="v" id="kOk">0<small> 点</small></div></div>
       <div class="kpi help"><div class="l">わからない</div><div class="v" id="kHelp">0<small> 点</small></div></div>
     </div>
-    <div class="send">
-      <button type="button" class="primary" id="pdfBtn">PDFで保存</button>
-      <button type="button" class="primary" id="csvBtn">CSVで保存</button>
-    </div>
-    <div class="linebox">
-      <div class="lb-h">スマートフォンの方は、LINEでも送れます</div>
-      <div class="send">
-        <button type="button" class="linebtn" id="lineBtn"><span class="lg">LINE</span>LINEで送る</button>
-        <button type="button" class="ghost" id="shareBtn" hidden>ファイル（CSV）を共有する</button>
+
+    <div class="sq" id="sqMethod">
+      <div class="sq-h"><span class="sq-n">Q1</span>書類はどの方法でお送りいただきますか？</div>
+      <div class="tiles two">
+        <label class="tile"><input type="radio" name="sendMethod" value="data"><span class="box rd"></span><span class="lbl">メール等でデータを添付して送る<small>スキャン・写真のデータ（おすすめ）</small></span></label>
+        <label class="tile"><input type="radio" name="sendMethod" value="post"><span class="box rd"></span><span class="lbl">郵送で送る<small>原本・コピーを封筒で郵送</small></span></label>
       </div>
-      <p class="lb-note">「LINEで送る」を押すとLINEが開きます。送り先（当事務所の担当者など）を選ぶと、チェック結果の文面が入った状態になりますので、そのまま送信してください。<span id="shareNote" hidden>CSVファイルを送る場合は「ファイル（CSV）を共有する」からLINEを選んでください。</span></p>
-    </div>
-    <div class="note">
-      <p>・どちらか一方の保存で構いません。保存したファイルを、<b>書類をご提出いただく際にメールに添付（郵送の場合は印刷して同封）</b>してください。</p>
-      <p>・「PDFで保存」を押すと印刷画面が開きます。送信先（プリンター）で<b>「PDFに保存」</b>を選んでください。</p>
-      <p>・書類は、できるだけ<b>一度にまとめて</b>お送りください。</p>
-      <p>・ご提出期限：<b id="deadlineTxt"></b></p>
-      <div class="mailto">
+      <p class="mt-note" style="margin:6px 0 0">※ 紛失防止と迅速な処理のため、<b>データでのご共有をおすすめしております。</b></p>
+      <div class="mailto" id="postAddr" hidden>
         <div class="mt-h">郵送の場合のご提出先</div>
         <p><b>アカウンティングフォース税理士法人</b><br>
         〒101-0065　東京都千代田区西神田3-1-6　日本弘道会ビル3階<br>
         TEL 03-5341-4200　／　FAX 03-5341-4201</p>
-        <p class="mt-note">※ 紛失防止と迅速な処理のため、書類はスキャンや写真による<b>データでのご共有をおすすめしております。</b></p>
+        <p class="mt-note">チェックリストを印刷して同封いただくか、下の「LINEで送信」などで別途お送りください。</p>
       </div>
+    </div>
+
+    <div class="sq" id="sqDate">
+      <div class="sq-h"><span class="sq-n">Q2</span>書類はいつごろお送りいただく予定ですか？</div>
+      <div style="max-width:260px"><input type="date" id="sendDate"></div>
+      <p class="mt-note" style="margin:6px 0 0">おおよその日付で構いません。ご提出期限：<b id="deadlineTxt"></b>（書類はできるだけ<b>一度にまとめて</b>お送りください）</p>
+    </div>
+  </div>
+
+  <div class="card" id="submitCard">
+    <h2>チェックリストを送信する</h2>
+    <p class="desc">Q1・Q2をご入力のうえ、いずれかの方法で当事務所へお送りください。</p>
+    <div class="linebox">
+      <div class="lb-h">スマートフォンの方（おすすめ）</div>
+      <div class="send">
+        <button type="button" class="linebtn" id="lineBtn"><span class="lg">LINE</span>LINEで送信</button>
+        <button type="button" class="ghost" id="shareBtn" hidden>ファイル（CSV）を共有する</button>
+      </div>
+      <p class="lb-note">LINEが開きますので、送り先（当事務所の担当者など）を選んで、そのまま送信してください。チェック結果・送り方・送付予定日が文面に入ります。<span id="shareNote" hidden>CSVファイルで送る場合は「ファイル（CSV）を共有する」からLINEやメールを選んでください。</span></p>
+    </div>
+    <div class="pcbox">
+      <div class="lb-h" style="color:var(--info)">パソコンの方・郵送の方</div>
+      <div class="send">
+        <button type="button" class="primary" id="pdfBtn">PDFで保存</button>
+        <button type="button" class="primary" id="csvBtn">CSVで保存</button>
+      </div>
+      <p class="lb-note">保存したファイルを、書類をお送りいただく際に<b>メールに添付（郵送の場合は印刷して同封）</b>してください。「PDFで保存」を押すと印刷画面が開きますので、送信先（プリンター）で「PDFに保存」を選んでください。</p>
     </div>
   </div>
 
@@ -459,9 +484,11 @@ const EVENTS = {
   q_gift:{t:"お金や財産をもらった", d:["贈与の金額・時期がわかる資料","※年110万円を超える場合などは、別途贈与税の申告が必要になることがあります"]}
 };
 const STAT = {ok:"準備できた", help:"わからない", "":"未準備"};
+const METHOD = {data:"メール等でデータを添付して送る", post:"郵送で送る"};
+const fmtDate = d=>{ if(!d) return ""; const m=d.match(/^(\d{4})-(\d{2})-(\d{2})$/); return m?`${+m[1]}年${+m[2]}月${+m[3]}日`:d; };
 
 /* ===== 状態 ===== */
-const blank = ()=>({info:{}, q:{}, items:{}, cats:{}, sales2y:"", step:1});
+const blank = ()=>({info:{}, q:{}, items:{}, cats:{}, sales2y:"", send:{method:"",date:""}, step:1});
 let state = blank();
 const $ = id=>document.getElementById(id);
 function esc(s){return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
@@ -578,11 +605,29 @@ document.addEventListener("change", e=>{
   if(t.dataset.f){ const id=t.closest(".doc").dataset.id; (state.items[id]=state.items[id]||{})[t.dataset.f]=t.value; }
   if(t.id==="cName"||t.id==="cTel") state.info={name:$("cName").value, tel:$("cTel").value};
   if(t.id==="sales2y") state.sales2y=t.value;
+  if(t.name==="sendMethod"){ state.send.method=t.value; paintSend(); }
+  if(t.id==="sendDate"){ state.send.date=t.value; }
   save();
 });
 document.addEventListener("input", e=>{ if(e.target.matches('input[type=text],input[type=number]')) e.target.dispatchEvent(new Event("change",{bubbles:true})); });
 
 function toast(m){ const b=document.createElement("div"); b.className="toast"; b.textContent=m; document.body.appendChild(b); setTimeout(()=>b.remove(),2600); }
+
+/* ===== 送り方 ===== */
+function paintSend(){
+  state.send=state.send||{method:"",date:""};
+  document.querySelectorAll('input[name=sendMethod]').forEach(r=>{ r.checked=(r.value===state.send.method); r.closest(".tile").classList.toggle("on",r.checked); });
+  $("postAddr").hidden = state.send.method!=="post";
+  $("sendDate").value = state.send.date||"";
+}
+function checkSend(){
+  const miss = !state.send.method ? "sqMethod" : !state.send.date ? "sqDate" : "";
+  if(!miss) return true;
+  const el=$(miss); el.scrollIntoView({behavior:"smooth",block:"center"});
+  el.classList.add("flash"); setTimeout(()=>el.classList.remove("flash"),1800);
+  toast(miss==="sqMethod" ? "Q1：書類の送り方を選んでください" : "Q2：送付予定日を入力してください");
+  return false;
+}
 
 /* ===== CSV ===== */
 function rows(){
@@ -593,6 +638,8 @@ function rows(){
     out.push([sec,d.id,d.name,STAT[it.st||""],it.qty||"",it.memo||""]); });
   if(state.q.q_biz) CATS.forEach(([id,t])=>out.push(["領収書の仕分け",id,t,state.cats[id]?"仕分け済":"","",""]));
   if(state.q.q_new && state.q.q_biz) out.push(["初回ご依頼","s2y","令和6年の課税売上高（千円）",state.sales2y||"","",""]);
+  out.push(["書類の送り方","send_m","送付方法",METHOD[state.send.method]||"未回答","",""]);
+  out.push(["書類の送り方","send_d","送付予定日",state.send.date||"未回答","",""]);
   return out;
 }
 const cell=v=>{v=String(v??"").trim(); return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;};
@@ -620,6 +667,8 @@ function importCSV(text){
     else if(/^[abc]\d+$/.test(id)) s.items[id]={st:rev[c[3]]||"",qty:c[4]||"",memo:c[5]||"",open:!!(c[4]||c[5])};
     else if(/^k\d+$/.test(id)) s.cats[id]=c[3]==="仕分け済";
     else if(id==="s2y") s.sales2y=c[3]||"";
+    else if(id==="send_m") s.send.method=Object.keys(METHOD).find(k=>METHOD[k]===c[3])||"";
+    else if(id==="send_d") s.send.date=/^\d{4}-\d{2}-\d{2}$/.test(c[3])?c[3]:"";
   });
   state=s; init(); go(2); toast("CSVを読み込みました。");
 }
@@ -639,6 +688,7 @@ function buildPrint(){
      <span>書類：準備できた ${c.ok} ／ わからない ${c.help} ／ 合計 ${c.total} 点</span></div>
    <div class="p-box"><b>当てはまると回答した項目：</b>${sel.length?esc(sel.join("、")):"なし"}</div>
    ${ev.length?`<div class="p-box"><b>ご連絡が必要なできごと：</b>${esc(ev.join("、"))}</div>`:""}
+   <div class="p-box"><b>書類の送り方：</b>${esc(METHOD[state.send.method]||"未回答")}　<b>送付予定日：</b>${esc(fmtDate(state.send.date)||"未回答")}</div>
    <table class="p"><thead><tr><th>書類</th><th style="width:70px">状況</th><th style="width:36px">部数</th><th style="width:35%">メモ</th></tr></thead><tbody>${body||'<tr><td colspan="4">該当なし</td></tr>'}</tbody></table>
    ${state.q.q_biz?`<div class="p-box"><b>領収書の仕分け済み：</b>${cats.length?esc(cats.join("、")):"なし"}</div>`:""}
    ${(state.q.q_new&&state.q.q_biz)?`<div class="p-box"><b>令和6年の課税売上高：</b>${esc(state.sales2y||"未記入")}${state.sales2y?" 千円":""}</div>`:""}
@@ -652,6 +702,8 @@ function lineText(){
   L.push(`【確定申告 準備チェックリスト（${CONFIG.taxYear}）】`);
   L.push(`お名前：${state.info.name?state.info.name+" 様":"（未入力）"}`);
   if(state.info.tel) L.push(`ご連絡先：${state.info.tel}`);
+  L.push(`書類の送り方：${METHOD[state.send.method]||"未回答"}`);
+  L.push(`送付予定日：${fmtDate(state.send.date)||"未回答"}`);
   L.push(`書類：準備できた ${c.ok}／わからない ${c.help}／合計 ${c.total}点`);
   const grp={ok:[],help:[],"":[]};
   activeDocs().forEach(d=>{ const it=state.items[d.id]||{}; let t="・"+d.name;
@@ -665,6 +717,7 @@ function lineText(){
   return L.join("\n");
 }
 $("lineBtn").addEventListener("click", ()=>{
+  if(!checkSend()) return;
   window.location.href = "https://line.me/R/share?text=" + encodeURIComponent(lineText());
 });
 function csvFile(){
@@ -680,11 +733,12 @@ try{
   if(navigator.canShare && navigator.canShare({files:[csvFile()]})){ $("shareBtn").hidden=false; $("shareNote").hidden=false; }
 }catch(e){}
 $("shareBtn").addEventListener("click", async ()=>{
+  if(!checkSend()) return;
   try{ await navigator.share({files:[csvFile()], title:"確定申告チェックリスト", text:`確定申告チェックリスト（${state.info.name||""}）`}); }
   catch(e){ if(e.name!=="AbortError") toast("共有できませんでした。「CSVで保存」をご利用ください。"); }
 });
-$("pdfBtn").addEventListener("click", ()=>{ buildPrint(); window.print(); });
-$("csvBtn").addEventListener("click", exportCSV);
+$("pdfBtn").addEventListener("click", ()=>{ if(!checkSend()) return; buildPrint(); window.print(); });
+$("csvBtn").addEventListener("click", ()=>{ if(checkSend()) exportCSV(); });
 $("csvIn").addEventListener("change", e=>{ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>importCSV(r.result); r.readAsText(f,"utf-8"); e.target.value=""; });
 $("resetBtn").addEventListener("click", ()=>{ if(!confirm("入力内容をすべて消去します。よろしいですか？")) return; state=blank(); try{localStorage.removeItem(CONFIG.storageKey);}catch(e){} init(); go(1); });
 
@@ -709,7 +763,7 @@ try{ $("nojs").remove(); }catch(e){}
 function init(){
   $("deadlineChip").innerHTML=`ご提出期限 <b>${CONFIG.deadline}</b>`; $("deadlineTxt").textContent=CONFIG.deadline;
   $("cName").value=state.info.name||""; $("cTel").value=state.info.tel||"";
-  renderQ();
+  renderQ(); paintSend();
 }
 load(); init(); go(state.step||1);
 </script>
