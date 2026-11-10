@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>確定申告 準備チェックリスト（令和8年分）｜アカウンティングフォース税理士法人</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap">
+<style>
+:root{
+  /* 経営ナビゲーションと同じ配色 */
+  --navy:#23279e; --navy2:#3e44c0; --accent:#6f78ff; --bg:#f3f4fb; --card:#ffffff; --line:#e1e3f1;
+  --text:#1f2240; --sub:#6a6f8f; --info:#2a2fa8; --info-bg:rgba(62,68,192,.10); --input-bg:#f0f1ff;
+  --grad:linear-gradient(115deg,#141684 0%,#2a2fae 55%,#4a51d6 100%);
+  --ok:#2f7d5b; --ok-bg:#eaf8f1; --ok-bd:#a8dcc2;
+  --warn:#9a6b12; --warn-bg:#fff6df; --warn-bd:#f3d58f;
+  --bad:#b24a73; --bad-bg:#fdeef3; --bad-bd:#f4b3c8;
+}
+*{box-sizing:border-box}
+html,body,button,input,select,textarea{font-family:"Meiryo","メイリオ","Hiragino Sans","Yu Gothic",sans-serif}
+body{margin:0;background:var(--bg);color:var(--text);font-size:15px;line-height:1.75}
+.wrap{max-width:920px;margin:0 auto;padding:0 16px}
+
+header.top{background:var(--grad);color:#fff;padding:22px 0 20px}
+.firm{font-size:12.5px;opacity:.85;letter-spacing:.05em}
+.titlerow{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+header h1{margin:4px 0 2px;font-size:25px;letter-spacing:.05em;line-height:1.35}
+.brand{font-family:"Parisienne",cursive;font-size:22px;color:rgba(255,255,255,.92)}
+header .lead{margin:6px 0 0;font-size:14px;opacity:.95}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 12px;font-size:13px}
+.chip b{color:#fff}
+
+/* ステッパー */
+.steps{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(30,34,120,.06)}
+.steps ol{list-style:none;margin:0 auto;padding:10px 16px;display:flex;gap:6px;max-width:920px}
+.steps li{flex:1}
+.steps button{width:100%;display:flex;align-items:center;gap:8px;justify-content:center;background:transparent;border:none;border-bottom:3px solid transparent;padding:6px 4px;color:var(--sub);font-size:14px;cursor:pointer;border-radius:8px 8px 0 0}
+.steps .n{width:24px;height:24px;border-radius:50%;background:var(--line);color:var(--sub);display:grid;place-items:center;font-size:12.5px;font-weight:700;flex:none}
+.steps button.on{color:var(--info);font-weight:700;border-bottom-color:var(--navy2);background:var(--info-bg)}
+.steps button.on .n{background:var(--grad);color:#fff}
+.steps button.done .n{background:var(--ok);color:#fff}
+.progline{height:4px;background:var(--line)}
+.progline i{display:block;height:100%;width:0;background:var(--grad);transition:width .3s}
+
+main{padding:20px 0 90px}
+.panel{display:none}.panel.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:16px;box-shadow:0 1px 3px rgba(30,34,120,.05)}
+.card h2{margin:0 0 4px;font-size:18px;color:var(--info)}
+.desc{margin:0 0 12px;color:var(--sub);font-size:14px}
+.welcome{border-left:5px solid var(--navy2);background:linear-gradient(90deg,var(--info-bg),var(--card) 70%)}
+.welcome p{margin:4px 0}
+.ease{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-top:10px}
+.ease div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13.5px}
+.ease b{color:var(--info)}
+
+label.f{display:block;font-size:13px;color:var(--sub)}
+input[type=text],input[type=date],input[type=number]{font-size:14px;width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--text)}
+input:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+
+/* 質問タイル */
+h3.grp{font-size:14.5px;color:var(--info);border-left:4px solid var(--navy2);padding-left:8px;margin:20px 0 8px}
+h3.grp:first-of-type{margin-top:6px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
+.tile{position:relative;display:flex;align-items:center;gap:10px;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;background:#fff;cursor:pointer;transition:all .15s;font-size:14.5px;line-height:1.5}
+.tile:hover{border-color:var(--accent)}
+.tile input{position:absolute;opacity:0;pointer-events:none}
+.tile .box{flex:none;width:22px;height:22px;border-radius:6px;border:2px solid #c5c9e6;display:grid;place-items:center;color:#fff;font-size:14px;font-weight:700;background:#fff}
+.tile .lbl{flex:1}
+.tile .lbl small{display:block;color:var(--sub);font-size:12px}
+.tile.on{border-color:var(--navy2);background:var(--input-bg)}
+.tile.on .box{background:var(--grad);border-color:transparent}
+.tile.on .box::after{content:"✓"}
+.tile:has(input:focus-visible){outline:2px solid var(--accent)}
+
+.navbtns{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:6px}
+button{font-family:inherit;cursor:pointer}
+.primary{background:var(--grad);color:#fff;border:none;border-radius:10px;padding:12px 26px;font-size:15px;font-weight:700;box-shadow:0 4px 12px rgba(46,52,190,.25)}
+.primary:hover{filter:brightness(1.08)}
+.ghost{background:var(--card);color:var(--info);border:1px solid var(--line);border-radius:10px;padding:10px 18px;font-size:14px}
+.ghost:hover{border-color:var(--navy2)}
+.btn-file{display:inline-block}
+
+/* 書類カード */
+.summary{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.ring{--p:0;width:78px;height:78px;border-radius:50%;background:conic-gradient(var(--navy2) calc(var(--p)*1%),var(--line) 0);display:grid;place-items:center;flex:none}
+.ring span{width:62px;height:62px;border-radius:50%;background:#fff;display:grid;place-items:center;font-weight:800;color:var(--info);font-size:16px}
+.summary .msg{flex:1;min-width:220px}
+.summary .msg b{color:var(--info);font-size:20px}
+.cheer{font-size:13.5px;color:var(--sub);margin-top:2px}
+
+.doc{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:8px;background:#fff;transition:all .15s}
+.doc.ok{background:var(--ok-bg);border-color:var(--ok-bd)}
+.doc.help{background:var(--warn-bg);border-color:var(--warn-bd)}
+.doc.flash{outline:3px solid var(--accent);outline-offset:2px}
+.chk{flex:none;width:30px;height:30px;border-radius:8px;border:2px solid #c5c9e6;background:#fff;display:grid;place-items:center;font-size:17px;color:#fff;font-weight:700;margin-top:1px}
+.doc.ok .chk{background:var(--ok);border-color:var(--ok)}
+.doc.ok .chk::after{content:"✓"}
+.doc .body{flex:1;min-width:0}
+.doc .name{font-weight:700}
+.doc.ok .name{color:var(--ok)}
+.doc .hint{display:block;font-size:13px;color:var(--sub);font-weight:normal}
+.doc .acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center}
+.mini{font-size:12.5px;border:1px solid var(--line);background:#fff;color:var(--sub);border-radius:999px;padding:3px 11px}
+.mini:hover{border-color:var(--navy2);color:var(--info)}
+.doc.help .mini.helpbtn{background:var(--warn);border-color:var(--warn);color:#fff}
+.extra{display:none;grid-template-columns:100px 1fr;gap:8px;margin-top:8px}
+.doc.open .extra{display:grid}
+.extra label.f{font-size:12px}
+.helpnote{display:none;font-size:12.5px;color:var(--warn);margin-top:4px}
+.doc.help .helpnote{display:block}
+
+.tip{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:50%;background:var(--info-bg);color:var(--info);font-size:12px;font-weight:700;cursor:help;margin-left:5px;vertical-align:1px;border:none;padding:0}
+.term{border-bottom:1px dashed var(--navy2);cursor:help;color:var(--info)}
+#tooltip{position:fixed;z-index:100;max-width:340px;background:#1f2240;color:#fff;font-size:13px;line-height:1.7;padding:10px 13px;border-radius:10px;box-shadow:0 8px 22px rgba(20,22,90,.25);display:none;pointer-events:none}
+
+.note{background:var(--info-bg);border:1px solid rgba(62,68,192,.18);border-radius:10px;padding:10px 14px;font-size:13.5px;margin-top:12px;color:var(--text)}
+.note p{margin:2px 0}
+.alert{background:var(--bad-bg);border:1px solid var(--bad-bd);color:#7d2f4f;border-radius:12px;padding:12px 16px;margin-bottom:16px}
+.alert h3{margin:0 0 4px;font-size:15px;color:var(--bad)}
+.alert ul{margin:4px 0 0;padding-left:1.2em;font-size:13.5px}
+.done-banner{display:none;background:var(--ok-bg);border:1px solid var(--ok-bd);color:var(--ok);border-radius:12px;padding:14px 18px;margin-bottom:16px;font-weight:700}
+.done-banner.show{display:block}
+.empty{text-align:center;color:var(--sub);padding:20px}
+
+.cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:6px;margin-top:6px}
+.cat{display:flex;gap:8px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:13.5px;cursor:pointer;background:#fff}
+.cat input{margin-top:5px;accent-color:var(--navy2)}
+.cat.done{background:var(--ok-bg);border-color:var(--ok-bd)}
+.ngbox{background:var(--warn-bg);border:1px solid var(--warn-bd);border-radius:10px;padding:10px 14px;font-size:13.5px;margin-top:10px}
+.ngbox p{margin:2px 0}
+
+.send{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.sendsum{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:12px}
+.kpi{border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.kpi .l{font-size:12px;color:var(--sub)}
+.kpi .v{font-size:24px;font-weight:800;color:var(--info)}
+.kpi.ok .v{color:var(--ok)} .kpi.help .v{color:var(--warn)}
+.kpi .v small{font-size:13px;font-weight:400;color:var(--sub)}
+.mailto{background:#fff;border:1px solid var(--line);border-left:4px solid var(--navy2);border-radius:8px;padding:10px 14px;margin:8px 0 4px}
+.mailto .mt-h{font-weight:700;color:var(--info);font-size:14px;margin-bottom:2px}
+.mailto p{margin:2px 0}
+.mailto .mt-note{font-size:13px;color:var(--sub);margin-top:6px}
+.linebox{border:1px solid #bfe8cf;background:#f1fbf5;border-radius:10px;padding:12px 14px;margin-top:12px}
+.lb-h{font-weight:700;color:#06893f;font-size:14px;margin-bottom:6px}
+.linebtn{display:inline-flex;align-items:center;gap:8px;background:#06c755;color:#fff;border:none;border-radius:10px;padding:12px 22px;font-size:15px;font-weight:700;box-shadow:0 4px 12px rgba(6,199,85,.25)}
+.linebtn:hover{filter:brightness(1.05)}
+.linebtn .lg{background:#fff;color:#06c755;border-radius:6px;font-size:10.5px;font-weight:800;padding:1px 5px;letter-spacing:.02em}
+.lb-note{font-size:12.5px;color:var(--sub);margin:8px 0 0}
+details.rules{margin-top:4px}
+details.rules summary{cursor:pointer;font-weight:700;color:var(--info)}
+details.rules ol{margin:8px 0 0;padding-left:1.3em;font-size:14px}
+details.rules li{margin:6px 0}
+footer{text-align:center;font-size:13px;color:var(--sub);margin-top:10px}
+footer b{color:var(--info)}
+#printArea{display:none}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 18px;border-radius:10px;z-index:200;font-size:14px;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+
+@media (max-width:640px){
+  header h1{font-size:21px}
+  .steps button{font-size:12.5px;flex-direction:column;gap:2px}
+  .card{padding:16px}
+  .tiles{grid-template-columns:1fr}
+  .extra{grid-template-columns:1fr}
+}
+@media print{
+  @page{size:A4;margin:12mm}
+  body{background:#fff;font-size:10.5pt}
+  .screen{display:none!important}
+  #tooltip{display:none!important}
+  #printArea{display:block}
+  .p-head{border-bottom:2px solid #23279e;padding-bottom:5px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:flex-end}
+  .p-head h1{font-size:15pt;margin:0;color:#23279e}
+  .p-head span{font-size:9pt;color:#444}
+  .p-meta{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:9.5pt;margin:4px 0}
+  .p-box{border:1px solid #c5c9e6;border-radius:4px;padding:5px 8px;font-size:9pt;margin:6px 0}
+  .p-box b{color:#23279e}
+  table.p{width:100%;border-collapse:collapse;font-size:9pt}
+  table.p th,table.p td{border:1px solid #9aa0c8;padding:3px 5px;vertical-align:top}
+  table.p th{background:#e9eaf8!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  table.p tr.sec td{background:#3e44c0!important;color:#fff;font-weight:bold;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  table.p tr{page-break-inside:avoid}
+  table.p tr.sec{break-after:avoid;page-break-after:avoid}
+  .p-foot{margin-top:8px;font-size:8.5pt;color:#444}
+}
+</style>
+</head>
+<body>
+<div id="nojs" style="margin:16px;padding:16px 18px;border:2px solid #3e44c0;border-radius:12px;background:#f0f1ff;color:#1f2240;font-family:sans-serif;line-height:1.8">
+  <b style="color:#2a2fa8">この画面では入力・保存ができません</b><br>
+  メールアプリのプレビューでは、チェックリストを操作できません。お手数ですが、下記のURLをタップしてブラウザ（Safari・Chromeなど）で開いてください。<br>
+  <a href="https://kasehiroshi-code.github.io/kakutei-checklist/" style="color:#2a2fa8;font-weight:bold;word-break:break-all">https://kasehiroshi-code.github.io/kakutei-checklist/</a>
+</div>
+<div class="screen">
+<header class="top">
+  <div class="wrap">
+    <div class="firm">アカウンティングフォース税理士法人</div>
+    <div class="titlerow"><h1>確定申告 準備チェックリスト</h1><span class="brand">〜 Accounting Force 〜</span></div>
+    <p class="lead">令和8年分の確定申告に必要な書類を、かんたんな質問でご案内します。</p>
+    <div class="chips"><span class="chip">所要時間 <b>約3分</b></span><span class="chip" id="deadlineChip"></span></div>
+  </div>
+</header>
+
+<nav class="steps" aria-label="手順">
+  <ol>
+    <li><button type="button" data-go="1"><span class="n">1</span>はじめの質問</button></li>
+    <li><button type="button" data-go="2"><span class="n">2</span>書類を集める</button></li>
+    <li><button type="button" data-go="3"><span class="n">3</span>保存して送る</button></li>
+  </ol>
+  <div class="progline"><i id="progLine"></i></div>
+</nav>
+
+<main class="wrap">
+
+<!-- STEP 1 -->
+<section class="panel" id="p1">
+  <div class="card welcome">
+    <h2>はじめに</h2>
+    <p>いくつかの質問に答えていただくと、<b>お客様に必要な書類だけ</b>をリストにしてご案内します。</p>
+    <div class="ease">
+      <div><b>当てはまるものを選ぶだけ</b><br>選ばなかった項目は表示されません</div>
+      <div><b>わからなくても大丈夫</b><br>迷ったら選んでおけば、担当者が確認します</div>
+      <div><b>途中で閉じてもOK</b><br>入力内容はこの画面に保存されます</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>お客様情報</h2>
+    <div class="info-grid">
+      <div><label class="f" for="cName">お名前</label><input type="text" id="cName" placeholder="例）山田 太郎"></div>
+      <div><label class="f" for="cTel">日中のご連絡先（任意）</label><input type="text" id="cTel" placeholder="例）090-1234-5678"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>令和8年（1月～12月）に、当てはまるものを選んでください</h2>
+    <p class="desc">いくつでも選べます。迷ったものは選んでおいてください。</p>
+    <div id="qArea"></div>
+  </div>
+
+  <div class="navbtns">
+    <span></span>
+    <button type="button" class="primary" data-go="2">必要な書類を見る →</button>
+  </div>
+</section>
+
+<!-- STEP 2 -->
+<section class="panel" id="p2">
+  <div id="alerts"></div>
+  <div class="done-banner" id="doneBanner">すべての書類の確認が終わりました。ありがとうございます！ 次は「3 保存して送る」へお進みください。</div>
+
+  <div class="card">
+    <div class="summary">
+      <div class="ring" id="ring"><span id="ringTxt">0%</span></div>
+      <div class="msg">
+        <div><span id="whoTxt">お客様</span>にご用意いただく書類は <b id="docCount">0</b> 点です</div>
+        <div class="cheer" id="cheer"></div>
+      </div>
+    </div>
+    <div class="note"><p>手元にそろった書類から、左の □ にチェックを付けてください。見つからない・よくわからない書類は「わからない」を押していただければ、担当者からご案内します。<br>言葉の意味は <button type="button" class="tip" data-tip="このように「？」マークや点線の言葉にカーソルを合わせる（スマートフォンではタップする）と、説明が表示されます。">?</button> にカーソルを合わせると表示されます。</p></div>
+  </div>
+
+  <div id="docArea"></div>
+
+  <div class="card" id="salesCard" hidden>
+    <h2>はじめてご依頼いただく事業者の方へ</h2>
+    <label class="f" for="sales2y">令和6年（2年前）の <span class="term" tabindex="0" data-tip="消費税がかかる売上の合計額のことです。消費税を納める必要があるかどうか（売上1,000万円超かどうか）の判定に使います。おおよその金額で構いません。">課税売上高</span>（年間の売上金額）</label>
+    <div style="display:flex;align-items:center;gap:8px;max-width:320px"><input type="number" id="sales2y" min="0" placeholder="例）8500"><span style="white-space:nowrap">千円</span></div>
+    <p class="desc" style="margin-top:6px">正確な金額がわからない場合は、おおよその金額で構いません。ご不明な場合は空欄のままで大丈夫です。</p>
+  </div>
+
+  <div class="navbtns">
+    <button type="button" class="ghost" data-go="1">← 質問に戻る</button>
+    <button type="button" class="primary" data-go="3">保存して送る →</button>
+  </div>
+</section>
+
+<!-- STEP 3 -->
+<section class="panel" id="p3">
+  <div class="card">
+    <h2>チェックリストを保存して、書類と一緒にお送りください</h2>
+    <div class="sendsum">
+      <div class="kpi"><div class="l">ご用意いただく書類</div><div class="v" id="kTotal">0<small> 点</small></div></div>
+      <div class="kpi ok"><div class="l">準備できた</div><div class="v" id="kOk">0<small> 点</small></div></div>
+      <div class="kpi help"><div class="l">わからない</div><div class="v" id="kHelp">0<small> 点</small></div></div>
+    </div>
+    <div class="send">
+      <button type="button" class="primary" id="pdfBtn">PDFで保存</button>
+      <button type="button" class="primary" id="csvBtn">CSVで保存</button>
+    </div>
+    <div class="linebox">
+      <div class="lb-h">スマートフォンの方は、LINEでも送れます</div>
+      <div class="send">
+        <button type="button" class="linebtn" id="lineBtn"><span class="lg">LINE</span>LINEで送る</button>
+        <button type="button" class="ghost" id="shareBtn" hidden>ファイル（CSV）を共有する</button>
+      </div>
+      <p class="lb-note">「LINEで送る」を押すとLINEが開きます。送り先（当事務所の担当者など）を選ぶと、チェック結果の文面が入った状態になりますので、そのまま送信してください。<span id="shareNote" hidden>CSVファイルを送る場合は「ファイル（CSV）を共有する」からLINEを選んでください。</span></p>
+    </div>
+    <div class="note">
+      <p>・どちらか一方の保存で構いません。保存したファイルを、<b>書類をご提出いただく際にメールに添付（郵送の場合は印刷して同封）</b>してください。</p>
+      <p>・「PDFで保存」を押すと印刷画面が開きます。送信先（プリンター）で<b>「PDFに保存」</b>を選んでください。</p>
+      <p>・書類は、できるだけ<b>一度にまとめて</b>お送りください。</p>
+      <p>・ご提出期限：<b id="deadlineTxt"></b></p>
+      <div class="mailto">
+        <div class="mt-h">郵送の場合のご提出先</div>
+        <p><b>アカウンティングフォース税理士法人</b><br>
+        〒101-0065　東京都千代田区西神田3-1-6　日本弘道会ビル3階<br>
+        TEL 03-5341-4200　／　FAX 03-5341-4201</p>
+        <p class="mt-note">※ 紛失防止と迅速な処理のため、書類はスキャンや写真による<b>データでのご共有をおすすめしております。</b></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <details class="rules">
+      <summary>ご依頼にあたってのお願い（ご一読ください）</summary>
+      <ol>
+        <li><b>一部の書類はお預かりします。</b><br>申告後に税務署から問い合わせがあった場合に備え、一部の書類は当事務所で保管し、1年後にご返却します。また、確認ミスを防ぐため、書類に蛍光ペンなどで印を付けることがあります。</li>
+        <li><b>書類はできるだけ一度にまとめてお送りください。</b><br>後から追加の書類が届くと申告書の作り直しが必要になり、申告報酬が増えることがあります。</li>
+        <li><b>お見積り後に申告内容が変わる場合はお知らせください。</b><br>お見積り時と実際の申告内容が異なる場合、ご請求金額が変わることがあります。</li>
+        <li><b>インボイス登録をされている方へ</b><br>所得税に加えて消費税の申告・納税が必要です。別途、消費税申告料（20,000円～）を申し受けます。</li>
+      </ol>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2 style="font-size:15px">その他の操作</h2>
+    <div class="send">
+      <label class="ghost btn-file">保存したCSVを読み込む<input type="file" id="csvIn" accept=".csv" hidden></label>
+      <button type="button" class="ghost" id="resetBtn">入力内容をすべて消去</button>
+    </div>
+    <p class="desc" style="margin-top:8px">別のパソコンで続きを入力する場合は、保存したCSVを読み込んでください。</p>
+  </div>
+
+  <div class="navbtns"><button type="button" class="ghost" data-go="2">← 書類リストに戻る</button><span></span></div>
+
+  <footer>
+    <b>アカウンティングフォース税理士法人</b><br>
+    〒101-0065 東京都千代田区西神田3-1-6 日本弘道会ビル3階<br>
+    TEL 03-5341-4200　FAX 03-5341-4201<br>
+    ご不明な点がございましたら、お気軽に担当者までお問い合わせください。
+  </footer>
+</section>
+</main>
+</div>
+
+<div id="printArea"></div>
+<div id="tooltip" role="tooltip"></div>
+
+<script>
+/* ===== 設定（毎年ここを変更） ===== */
+const CONFIG = { taxYear:"令和8年分", deadline:"令和9年1月31日", storageKey:"af_kakutei_r8_v2" };
+
+/* ===== はじめの質問 ===== */
+const QGROUPS = [
+  {title:"収入について", qs:[
+    {id:"q_sal",  t:"お勤め先から給与・賞与をもらった", s:"会社員・役員・パート・アルバイトなど"},
+    {id:"q_pen",  t:"年金を受け取った", s:"公的年金・企業年金・個人年金"},
+    {id:"q_ret",  t:"退職金を受け取った"},
+    {id:"q_sec",  t:"株式や投資信託を持っている", s:"証券会社の口座（NISAのみの方は不要）"},
+    {id:"q_fee",  t:"原稿料・講演料・業務委託料などの報酬があった"},
+    {id:"q_insm", t:"保険の満期金・解約金を受け取った"},
+    {id:"q_biz",  t:"事業を営んでいる", s:"個人事業主・フリーランスの方"},
+    {id:"q_rent", t:"不動産を貸している", s:"アパート・マンション・駐車場・土地など"}
+  ]},
+  {title:"ご家族・保険について", qs:[
+    {id:"q_fam",   t:"配偶者や、扶養しているご家族がいる"},
+    {id:"q_koku",  t:"国民健康保険・国民年金を自分で支払った", s:"ご家族の分を支払った場合も"},
+    {id:"q_ideco", t:"小規模企業共済・iDeCoに加入している"},
+    {id:"q_life",  t:"生命保険・医療保険・個人年金保険に加入している"},
+    {id:"q_quake", t:"地震保険に加入している"}
+  ]},
+  {title:"医療費・寄附・住まいについて", qs:[
+    {id:"q_med",    t:"医療費が多くかかった", s:"目安：ご家族分を合わせて年10万円以上"},
+    {id:"q_kifu",   t:"ふるさと納税や寄附をした"},
+    {id:"q_loan",   t:"住宅ローンがある・住宅を購入した"},
+    {id:"q_reform", t:"リフォームや耐震工事をした"}
+  ]},
+  {title:"その他", qs:[
+    {id:"q_tax",  t:"税務署からはがき・封書が届いた"},
+    {id:"q_sell", t:"土地・建物や株式などを売った", s:"買い換えも含みます"},
+    {id:"q_loss", t:"災害や盗難で損害を受けた"},
+    {id:"q_gift", t:"お金や財産をもらった（贈与を受けた）"},
+    {id:"q_new",  t:"当事務所への確定申告のご依頼は今回がはじめて"}
+  ]}
+];
+const QLABEL = {}; QGROUPS.forEach(g=>g.qs.forEach(q=>QLABEL[q.id]=q.t));
+
+/* ===== 書類（q：表示の条件となる質問） ===== */
+const DOCS = [
+  {sec:"収入がわかる書類"},
+  {id:"a03", q:"q_sal", name:"お勤め先の源泉徴収票", term:"源泉徴収票", hint:"勤務先が複数ある方・転職された方は、すべての勤務先の分",
+   tip:"1年間の給与・賞与の金額と、差し引かれた税金の額が書かれた書類です。通常、12月～1月にお勤め先から受け取ります。"},
+  {id:"a04", q:"q_pen", name:"年金の源泉徴収票", hint:"1月中旬～下旬に届くはがき型の書類（すべての年金分）",
+   tip:"公的年金（日本年金機構など）・企業年金・個人年金など、受け取っている年金すべての分をご用意ください。"},
+  {id:"a05", q:"q_ret", name:"退職金の源泉徴収票", hint:"退職時にお勤め先から受け取る書類",
+   tip:"「退職所得の源泉徴収票」という書類です。見当たらない場合は、お勤め先にお問い合わせください。"},
+  {id:"a09", q:"q_sec", name:"特定口座年間取引報告書", term:"特定口座年間取引報告書", hint:"証券会社から1月ごろ届きます（証券会社ごとにすべて）",
+   tip:"証券会社の口座で、1年間の株式・投資信託の売買や配当をまとめた書類です。電子交付の場合は、証券会社のサイトからPDFをダウンロードしてください。"},
+  {id:"a06", q:"q_sec", name:"配当金・分配金のお知らせ（特定口座以外で受け取った分）", hint:"配当金計算書・支払通知書など",
+   tip:"株式の配当金を、証券会社の特定口座ではなく銀行振込や郵便局で受け取った場合に届く書類です。特定口座で受け取った分は上の年間取引報告書に含まれるため不要です。該当がない場合は、チェックを付けて先へお進みください。"},
+  {id:"a07", q:"q_fee", name:"報酬の支払調書", term:"支払調書", hint:"届かない場合は、入金がわかる通帳のコピーや請求書の控えでも可",
+   tip:"報酬を支払った会社などが作成する「いくら支払い、いくら税金を差し引いたか」を記載した書類です。"},
+  {id:"a08", q:"q_insm", name:"保険の満期金・解約金の支払明細", hint:"保険会社から届く支払調書・支払明細など",
+   tip:"満期金・解約返戻金（途中で解約したときに戻ってくるお金）・年金形式の保険金を受け取った場合の書類です。"},
+  {sec:"ご家族に関する書類"},
+  {id:"a10", q:"q_fam", name:"配偶者・ご家族の収入がわかる書類", hint:"源泉徴収票など（収入がない場合はチェックだけで可）",
+   tip:"配偶者控除・扶養控除が使えるかどうかを判断するために使います。19歳以上23歳未満のお子さまにアルバイト収入がある場合は、金額がわかる書類をお願いします（収入額によっては控除を受けられます）。"},
+  {sec:"税金が安くなる書類（控除の証明書）"},
+  {id:"a11", q:"q_koku", name:"国民健康保険・国民年金の支払証明書／領収書", hint:"国民年金基金の証明書も含みます",
+   tip:"国民年金は日本年金機構から11月ごろ届く「控除証明書」、国民健康保険は市区町村の領収書や納付証明書です。お給料から差し引かれている健康保険・厚生年金は源泉徴収票に含まれるため不要です。"},
+  {id:"a12", q:"q_ideco", name:"小規模企業共済・iDeCoの掛金の証明書", hint:"「小規模企業共済等掛金払込証明書」",
+   tip:"小規模企業共済は個人事業主・会社役員向けの退職金制度、iDeCo（個人型確定拠出年金）は自分で積み立てる年金制度です。お給料から差し引かれている場合は源泉徴収票に含まれるため不要です。"},
+  {id:"a13", q:"q_life", name:"生命保険料の控除証明書", hint:"保険会社から10～11月ごろ届くはがき",
+   tip:"生命保険・医療保険・個人年金保険の証明書です。お勤め先の年末調整で提出済みのものは不要です。"},
+  {id:"a14", q:"q_quake", name:"地震保険料の控除証明書", hint:"保険会社から10～11月ごろ届くはがき",
+   tip:"地震保険の証明書です。お勤め先の年末調整で提出済みのものは不要です。"},
+  {id:"a15", q:"q_med", name:"医療費の領収書（介護サービス費を含む）", term:"医療費", hint:"「医療費のお知らせ」やマイナポータルの医療費通知でも可",
+   tip:"医療費控除の対象です。1年間の医療費が10万円（所得が200万円未満の方は所得の5%）を超える場合に税金が安くなります。保険から入院給付金などを受け取った場合は、メモ欄にご記入ください。"},
+  {id:"a16", q:"q_kifu", name:"寄附金の受領証明書（ふるさと納税など）", term:"受領証明書", hint:"ふるさと納税はポータルサイトの「寄附金控除に関する証明書」（電子データ）が便利です",
+   tip:"寄附先の自治体や団体が発行する証明書です。ふるさと納税で「ワンストップ特例」を申請していても、確定申告をする場合はすべての寄附を申告し直す必要がありますので、すべての証明書をご用意ください。"},
+  {id:"a17", q:"q_loan", name:"住宅ローンの年末残高証明書", term:"住宅ローン", hint:"金融機関から10月ごろ届きます",
+   tip:"住宅ローン控除を受けるための書類です。2年目以降で、お勤め先の年末調整で控除を受けている方は不要です。令和8年に住宅を購入・新築した方は、登記事項証明書や売買（請負）契約書のコピーもご用意ください。"},
+  {id:"a18", q:"q_reform", name:"リフォーム・耐震工事の証明書", hint:"「増改築等工事証明書」「住宅耐震改修証明書」など",
+   tip:"省エネ・バリアフリー・耐震などのリフォームをした場合、税金が安くなることがあります。工事をした建築士事務所や市区町村が発行する証明書と、工事の契約書・領収書をご用意ください。"},
+  {sec:"税務署からの書類"},
+  {id:"a02", q:"q_tax", name:"税務署から届いたはがき・封書", hint:"「確定申告のお知らせ」、予定納税の通知など",
+   tip:"税務署から届いたものはすべてお送りください。"},
+  {sec:"不動産を貸している方"},
+  {id:"b01", q:"q_rent", name:"家賃収入の明細・賃貸借契約書", hint:"管理会社からの送金明細や年間収支報告書",
+   tip:"1年間の家賃収入がわかる資料です。新しく結んだ契約・更新した契約がある場合は、契約書のコピーもご用意ください。"},
+  {id:"b02", q:"q_rent", name:"固定資産税の通知書（課税明細書）", hint:"毎年4～6月ごろ市区町村から届きます",
+   tip:"土地や建物を持っている方にかかる税金です。貸している物件の分が経費になります。"},
+  {id:"b03", q:"q_rent", name:"借入金の返済予定表", hint:"物件の購入資金を借りている方のみ",
+   tip:"経費になるのは返済額のうち「利息」の部分です。利息額を確認するために使います。借入れがなければチェックだけで構いません。"},
+  {id:"b04", q:"q_rent", name:"火災保険・修繕費などの領収書", hint:"貸している物件にかかった費用",
+   tip:"火災保険料や修理・修繕の費用は経費になります。金額の大きい工事は、工事内容がわかる資料もあわせてご用意ください。"},
+  {id:"b05", q:"q_rent", name:"その他、経費になりそうな領収書", hint:"管理費、仲介手数料、広告料、地代など",
+   tip:"判断に迷うものも、まずはお送りください。経費になるかどうかは当事務所で判断します。"},
+  {sec:"事業を営まれている方"},
+  {id:"c01", q:"q_biz", name:"領収書・請求書（種類ごとに分けたもの）", hint:"下の「仕分けの目安」をご覧ください",
+   tip:"領収書は「税金を減らすためのお金」です。できるだけご用意ください。日付順に並べる必要はありません。"},
+  {id:"c02", q:"q_biz", name:"通帳のコピー（1年分）", hint:"事業で使っている口座すべて",
+   tip:"1月～12月の1年分です。ネットバンキングの場合は、取引明細をダウンロードしたもので構いません。"},
+  {id:"c03", q:"q_biz", name:"クレジットカードの利用明細（1年分）", hint:"カード会社ごとにご用意ください",
+   tip:"事業の支払いに使ったカードの明細です。Web明細の場合は、ダウンロードしたものやCSVデータで構いません。"}
+];
+const CATS = [
+  ["k01","医療費（病院・薬局）"],["k02","飲食代"],["k03","タクシー代"],["k04","電車・バス代（ICカードのチャージはメモでも可）"],
+  ["k05","新聞・書籍・DVDなど"],["k06","車関係（ガソリン・高速代・駐車場・車検・保険・自動車税）"],["k07","月極駐車場代"],
+  ["k08","家賃（賃貸の方）"],["k09","携帯電話・電話・電気・水道・ガス代"],["k10","税金（固定資産税・個人事業税・消費税・印紙代）"],
+  ["k11","国民健康保険・国民年金"],["k12","送料（宅配便・郵便など）"],["k13","冠婚葬祭（会葬礼状や招待状に金額をメモ）"],
+  ["k14","その他、事業に関係する費用（火災保険・顧問料など）"]
+];
+const EVENTS = {
+  q_sell:{t:"土地・建物や株式などを売った", d:["売買契約書（売ったとき・買ったとき）","仲介手数料などの領収書","※特定口座で売った株式は、年間取引報告書で足ります"]},
+  q_loss:{t:"災害や盗難で損害を受けた", d:["被害の内容と金額がわかる資料（罹災証明書、被害届の控えなど）"]},
+  q_gift:{t:"お金や財産をもらった", d:["贈与の金額・時期がわかる資料","※年110万円を超える場合などは、別途贈与税の申告が必要になることがあります"]}
+};
+const STAT = {ok:"準備できた", help:"わからない", "":"未準備"};
+
+/* ===== 状態 ===== */
+const blank = ()=>({info:{}, q:{}, items:{}, cats:{}, sales2y:"", step:1});
+let state = blank();
+const $ = id=>document.getElementById(id);
+function esc(s){return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function save(){ try{localStorage.setItem(CONFIG.storageKey, JSON.stringify(state));}catch(e){} }
+function load(){ try{const s=localStorage.getItem(CONFIG.storageKey); if(s) state=Object.assign(blank(), JSON.parse(s));}catch(e){} }
+
+/* ===== 描画 ===== */
+function renderQ(){
+  $("qArea").innerHTML = QGROUPS.map(g=>`<h3 class="grp">${esc(g.title)}</h3><div class="tiles">${
+    g.qs.map(q=>`<label class="tile${state.q[q.id]?" on":""}"><input type="checkbox" data-q="${q.id}"${state.q[q.id]?" checked":""}><span class="box"></span><span class="lbl">${esc(q.t)}${q.s?`<small>${esc(q.s)}</small>`:""}</span></label>`).join("")
+  }</div>`).join("");
+}
+function activeDocs(){ return DOCS.filter(d=>d.id && state.q[d.q]); }
+
+function docHTML(d){
+  const it = state.items[d.id]||{};
+  let name = esc(d.name);
+  if(d.term) name = name.replace(esc(d.term), `<span class="term" tabindex="0" data-tip="${esc(d.tip)}">${esc(d.term)}</span>`);
+  const cls = it.st==="ok"?"ok":it.st==="help"?"help":"";
+  return `<div class="doc ${cls}${it.open?" open":""}" id="d-${d.id}" data-id="${d.id}">
+    <button type="button" class="chk" data-act="ok" aria-label="準備できた" aria-pressed="${it.st==="ok"}"></button>
+    <div class="body">
+      <div class="name">${name}<button type="button" class="tip" data-tip="${esc(d.tip)}" aria-label="説明">?</button><span class="hint">${esc(d.hint||"")}</span></div>
+      <div class="acts">
+        <button type="button" class="mini helpbtn" data-act="help">わからない</button>
+        <button type="button" class="mini" data-act="open">メモ・部数を書く（任意）</button>
+      </div>
+      <div class="helpnote">担当者からご案内します。気になる点があればメモにご記入ください。</div>
+      <div class="extra">
+        <div><label class="f">部数</label><input type="number" min="0" data-f="qty" value="${esc(it.qty||"")}"></div>
+        <div><label class="f">メモ・ご質問</label><input type="text" data-f="memo" value="${esc(it.memo||"")}" placeholder="気になる点があればご記入ください"></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderDocs(){
+  const qs = state.q;
+  // 特別なできごと
+  const ev = Object.keys(EVENTS).filter(k=>qs[k]);
+  $("alerts").innerHTML = ev.length ? `<div class="alert"><h3>お早めに当事務所へご連絡ください（TEL 03-5341-4200）</h3>
+    次のできごとがあった場合は、手続きや必要書類が個別に異なります。担当者からご案内しますので、お電話またはメールでご一報ください。
+    ${ev.map(k=>`<div style="margin-top:6px"><b>■ ${esc(EVENTS[k].t)}</b><ul>${EVENTS[k].d.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}</div>` : "";
+
+  let html="", cur=null, buf="";
+  const flush=()=>{ if(cur && buf) html+=`<div class="card"><h2>${esc(cur)}</h2>${buf}${cur==="事業を営まれている方"?bizExtra():""}</div>`; buf=""; };
+  DOCS.forEach(d=>{
+    if(d.sec){ flush(); cur=d.sec; return; }
+    if(qs[d.q]) buf+=docHTML(d);
+  });
+  flush();
+  if(!activeDocs().length) html = `<div class="card empty">質問で当てはまる項目が選ばれていません。<br>「← 質問に戻る」から選んでください。当てはまるものがない場合は、担当者までご連絡ください。</div>`;
+  $("docArea").innerHTML = html;
+  $("salesCard").hidden = !(qs.q_new && qs.q_biz);
+  $("sales2y").value = state.sales2y||"";
+  $("whoTxt").textContent = state.info.name ? state.info.name+" 様" : "お客様";
+  progress();
+}
+function bizExtra(){
+  return `<h3 class="grp">領収書の仕分けの目安</h3>
+  <p class="desc">日付順に並べる必要はありません。封筒やクリアファイルで種類ごとに分けていただくと、スムーズに処理できます（分け終わったものにチェック。該当がない種類はそのままで構いません）。</p>
+  <div class="cats">${CATS.map(([id,t],i)=>`<label class="cat${state.cats[id]?" done":""}"><input type="checkbox" data-cat="${id}"${state.cats[id]?" checked":""}><span>${i+1}. ${esc(t)}</span></label>`).join("")}</div>
+  <div class="ngbox"><p>✕ <b>事業に関係のない領収書は入れないでください。</b>（例：ご自宅での食事の食材、趣味の買い物 など）</p>
+  <p>✕ <b>クレジットカードの「売上票（ご利用控え）」は不要です。</b>カード会社の利用明細をもとに処理します。</p></div>`;
+}
+
+function counts(){
+  const ds=activeDocs();
+  const ok=ds.filter(d=>(state.items[d.id]||{}).st==="ok").length;
+  const help=ds.filter(d=>(state.items[d.id]||{}).st==="help").length;
+  return {total:ds.length, ok, help, done:ok+help};
+}
+function progress(){
+  const c=counts();
+  const p = c.total? Math.round(c.done/c.total*100):0;
+  $("docCount").textContent=c.total;
+  $("ring").style.setProperty("--p",p); $("ringTxt").textContent=p+"%";
+  $("progLine").style.width = (state.step===1?0:p)+"%";
+  const left=c.total-c.done;
+  $("cheer").textContent = !c.total ? "" : left===0 ? "すべて確認できました。お疲れさまでした！" :
+    c.done===0 ? "そろったものから、気軽にチェックしていきましょう。" :
+    left<=2 ? `あと ${left} 点です。もう少しです！` : `${c.done} 点確認済み。残り ${left} 点です。`;
+  $("doneBanner").classList.toggle("show", c.total>0 && left===0);
+  $("kTotal").innerHTML=c.total+"<small> 点</small>"; $("kOk").innerHTML=c.ok+"<small> 点</small>"; $("kHelp").innerHTML=c.help+"<small> 点</small>";
+  document.querySelectorAll(".steps button").forEach(b=>{
+    const n=+b.dataset.go; b.classList.toggle("on", n===state.step);
+    b.classList.toggle("done", n<state.step || (n===2 && c.total>0 && left===0));
+  });
+}
+
+function go(n){
+  state.step=n; save();
+  document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("on", p.id==="p"+n));
+  if(n===2) renderDocs(); else progress();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* ===== 操作 ===== */
+document.addEventListener("click", e=>{
+  const g=e.target.closest("[data-go]"); if(g){ go(+g.dataset.go); return; }
+  const a=e.target.closest("[data-act]"); if(!a) return;
+  const el=a.closest(".doc"), id=el.dataset.id; const it=state.items[id]=state.items[id]||{};
+  if(a.dataset.act==="ok") it.st = it.st==="ok" ? "" : "ok";
+  if(a.dataset.act==="help"){ it.st = it.st==="help" ? "" : "help"; if(it.st==="help") it.open=true; }
+  if(a.dataset.act==="open") it.open=!it.open;
+  el.classList.toggle("ok", it.st==="ok"); el.classList.toggle("help", it.st==="help"); el.classList.toggle("open", !!it.open);
+  el.querySelector(".chk").setAttribute("aria-pressed", it.st==="ok");
+  save(); progress();
+});
+document.addEventListener("change", e=>{
+  const t=e.target;
+  if(t.dataset.q){ state.q[t.dataset.q]=t.checked; t.closest(".tile").classList.toggle("on",t.checked); }
+  if(t.dataset.cat){ state.cats[t.dataset.cat]=t.checked; t.closest(".cat").classList.toggle("done",t.checked); }
+  if(t.dataset.f){ const id=t.closest(".doc").dataset.id; (state.items[id]=state.items[id]||{})[t.dataset.f]=t.value; }
+  if(t.id==="cName"||t.id==="cTel") state.info={name:$("cName").value, tel:$("cTel").value};
+  if(t.id==="sales2y") state.sales2y=t.value;
+  save();
+});
+document.addEventListener("input", e=>{ if(e.target.matches('input[type=text],input[type=number]')) e.target.dispatchEvent(new Event("change",{bubbles:true})); });
+
+function toast(m){ const b=document.createElement("div"); b.className="toast"; b.textContent=m; document.body.appendChild(b); setTimeout(()=>b.remove(),2600); }
+
+/* ===== CSV ===== */
+function rows(){
+  const out=[];
+  QGROUPS.forEach(g=>g.qs.forEach(q=>out.push(["はじめの質問",q.id,q.t,state.q[q.id]?"はい":"いいえ","",""])));
+  let sec="";
+  DOCS.forEach(d=>{ if(d.sec){sec=d.sec;return;} if(!state.q[d.q]) return; const it=state.items[d.id]||{};
+    out.push([sec,d.id,d.name,STAT[it.st||""],it.qty||"",it.memo||""]); });
+  if(state.q.q_biz) CATS.forEach(([id,t])=>out.push(["領収書の仕分け",id,t,state.cats[id]?"仕分け済":"","",""]));
+  if(state.q.q_new && state.q.q_biz) out.push(["初回ご依頼","s2y","令和6年の課税売上高（千円）",state.sales2y||"","",""]);
+  return out;
+}
+const cell=v=>{v=String(v??"").trim(); return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;};
+function exportCSV(){
+  const c=counts();
+  const head=[["確定申告 準備チェックリスト",CONFIG.taxYear],["お名前",state.info.name||""],["ご連絡先",state.info.tel||""],
+    ["出力日",new Date().toLocaleDateString("ja-JP")],["書類 準備できた／わからない／合計",`${c.ok}／${c.help}／${c.total}`],[],
+    ["区分","ID","項目","回答・状況","部数","メモ"]];
+  const txt=head.concat(rows()).map(r=>r.map(cell).join(",")).join("\r\n");
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob(["﻿"+txt],{type:"text/csv;charset=utf-8"}));
+  a.download=`確定申告チェックリスト_${CONFIG.taxYear}_${(state.info.name||"お名前未入力").replace(/[\\/:*?"<>|\s]/g,"")}.csv`;
+  document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);
+}
+function parseCSV(t){const r=[];let row=[],c="",q=false;for(let i=0;i<t.length;i++){const ch=t[i];
+  if(q){if(ch=='"'){if(t[i+1]=='"'){c+='"';i++;}else q=false;}else c+=ch;}
+  else if(ch=='"')q=true;else if(ch==','){row.push(c);c="";}else if(ch=='\n'){row.push(c);r.push(row);row=[];c="";}else if(ch!='\r')c+=ch;}
+  if(c||row.length){row.push(c);r.push(row);}return r;}
+function importCSV(text){
+  const s=blank(); const rev={"準備できた":"ok","わからない":"help"};
+  parseCSV(text.replace(/^﻿/,"")).forEach(c=>{
+    if(c[0]==="お名前") s.info.name=c[1]; if(c[0]==="ご連絡先") s.info.tel=c[1];
+    const id=c[1]||"";
+    if(/^q_/.test(id)) s.q[id]=c[3]==="はい";
+    else if(/^[abc]\d+$/.test(id)) s.items[id]={st:rev[c[3]]||"",qty:c[4]||"",memo:c[5]||"",open:!!(c[4]||c[5])};
+    else if(/^k\d+$/.test(id)) s.cats[id]=c[3]==="仕分け済";
+    else if(id==="s2y") s.sales2y=c[3]||"";
+  });
+  state=s; init(); go(2); toast("CSVを読み込みました。");
+}
+
+/* ===== PDF（印刷） ===== */
+function buildPrint(){
+  const c=counts(); const sel=Object.keys(QLABEL).filter(k=>state.q[k]).map(k=>QLABEL[k]);
+  let body="", cur="";
+  DOCS.forEach(d=>{ if(d.sec){cur=d.sec;return;} if(!state.q[d.q]) return; const it=state.items[d.id]||{};
+    if(cur){ body+=`<tr class="sec"><td colspan="4">${esc(cur)}</td></tr>`; cur=""; }
+    body+=`<tr><td>${esc(d.name)}</td><td style="white-space:nowrap">${esc(STAT[it.st||""])}</td><td>${esc(it.qty||"")}</td><td>${esc(it.memo||"")}</td></tr>`; });
+  const ev=Object.keys(EVENTS).filter(k=>state.q[k]).map(k=>EVENTS[k].t);
+  const cats=state.q.q_biz?CATS.filter(([id])=>state.cats[id]).map(([,t])=>t.replace(/（.*?）/g,"")):[];
+  $("printArea").innerHTML=`
+   <div class="p-head"><h1>確定申告 準備チェックリスト（${esc(CONFIG.taxYear)}）</h1><span>出力日：${new Date().toLocaleDateString("ja-JP")}</span></div>
+   <div class="p-meta"><span>お名前：<b>${esc(state.info.name||"")}</b></span><span>ご連絡先：${esc(state.info.tel||"")}</span>
+     <span>書類：準備できた ${c.ok} ／ わからない ${c.help} ／ 合計 ${c.total} 点</span></div>
+   <div class="p-box"><b>当てはまると回答した項目：</b>${sel.length?esc(sel.join("、")):"なし"}</div>
+   ${ev.length?`<div class="p-box"><b>ご連絡が必要なできごと：</b>${esc(ev.join("、"))}</div>`:""}
+   <table class="p"><thead><tr><th>書類</th><th style="width:70px">状況</th><th style="width:36px">部数</th><th style="width:35%">メモ</th></tr></thead><tbody>${body||'<tr><td colspan="4">該当なし</td></tr>'}</tbody></table>
+   ${state.q.q_biz?`<div class="p-box"><b>領収書の仕分け済み：</b>${cats.length?esc(cats.join("、")):"なし"}</div>`:""}
+   ${(state.q.q_new&&state.q.q_biz)?`<div class="p-box"><b>令和6年の課税売上高：</b>${esc(state.sales2y||"未記入")}${state.sales2y?" 千円":""}</div>`:""}
+   <div class="p-foot">アカウンティングフォース税理士法人　〒101-0065 東京都千代田区西神田3-1-6 日本弘道会ビル3階　TEL 03-5341-4200　FAX 03-5341-4201</div>`;
+}
+window.addEventListener("beforeprint", buildPrint);
+
+/* ===== LINEで送る ===== */
+function lineText(){
+  const c=counts(), L=[];
+  L.push(`【確定申告 準備チェックリスト（${CONFIG.taxYear}）】`);
+  L.push(`お名前：${state.info.name?state.info.name+" 様":"（未入力）"}`);
+  if(state.info.tel) L.push(`ご連絡先：${state.info.tel}`);
+  L.push(`書類：準備できた ${c.ok}／わからない ${c.help}／合計 ${c.total}点`);
+  const grp={ok:[],help:[],"":[]};
+  activeDocs().forEach(d=>{ const it=state.items[d.id]||{}; let t="・"+d.name;
+    const ex=[]; if(it.qty) ex.push(it.qty+"部"); if(it.memo) ex.push("メモ："+it.memo); if(ex.length) t+=`（${ex.join("、")}）`;
+    grp[it.st||""].push(t); });
+  [["ok","■準備できた"],["help","■わからない（ご案内をお願いします）"],["","■まだ準備できていない"]].forEach(([k,h])=>{ if(grp[k].length){ L.push(""); L.push(h); L.push(...grp[k]); } });
+  const ev=Object.keys(EVENTS).filter(k=>state.q[k]).map(k=>"・"+EVENTS[k].t);
+  if(ev.length){ L.push(""); L.push("■ご連絡が必要なできごと"); L.push(...ev); }
+  if(state.q.q_new&&state.q.q_biz){ L.push(""); L.push(`令和6年の課税売上高：${state.sales2y?Number(state.sales2y).toLocaleString()+"千円":"未記入"}`); }
+  if(!c.total){ L.push(""); L.push("（はじめの質問で当てはまる項目が選ばれていません）"); }
+  return L.join("\n");
+}
+$("lineBtn").addEventListener("click", ()=>{
+  window.location.href = "https://line.me/R/share?text=" + encodeURIComponent(lineText());
+});
+function csvFile(){
+  const c=counts();
+  const head=[["確定申告 準備チェックリスト",CONFIG.taxYear],["お名前",state.info.name||""],["ご連絡先",state.info.tel||""],
+    ["出力日",new Date().toLocaleDateString("ja-JP")],["書類 準備できた／わからない／合計",`${c.ok}／${c.help}／${c.total}`],[],
+    ["区分","ID","項目","回答・状況","部数","メモ"]];
+  const txt=head.concat(rows()).map(r=>r.map(cell).join(",")).join("\r\n");
+  const name=`確定申告チェックリスト_${CONFIG.taxYear}_${(state.info.name||"お名前未入力").replace(/[\\/:*?"<>|\s]/g,"")}.csv`;
+  return new File(["\uFEFF"+txt], name, {type:"text/csv"});
+}
+try{
+  if(navigator.canShare && navigator.canShare({files:[csvFile()]})){ $("shareBtn").hidden=false; $("shareNote").hidden=false; }
+}catch(e){}
+$("shareBtn").addEventListener("click", async ()=>{
+  try{ await navigator.share({files:[csvFile()], title:"確定申告チェックリスト", text:`確定申告チェックリスト（${state.info.name||""}）`}); }
+  catch(e){ if(e.name!=="AbortError") toast("共有できませんでした。「CSVで保存」をご利用ください。"); }
+});
+$("pdfBtn").addEventListener("click", ()=>{ buildPrint(); window.print(); });
+$("csvBtn").addEventListener("click", exportCSV);
+$("csvIn").addEventListener("change", e=>{ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>importCSV(r.result); r.readAsText(f,"utf-8"); e.target.value=""; });
+$("resetBtn").addEventListener("click", ()=>{ if(!confirm("入力内容をすべて消去します。よろしいですか？")) return; state=blank(); try{localStorage.removeItem(CONFIG.storageKey);}catch(e){} init(); go(1); });
+
+/* ===== ツールチップ ===== */
+const tt=$("tooltip"); let pinned=null;
+function showTip(el){ tt.textContent=el.dataset.tip; tt.style.display="block";
+  const r=el.getBoundingClientRect(), w=tt.offsetWidth, h=tt.offsetHeight;
+  let x=Math.min(Math.max(8, r.left+r.width/2-w/2), window.innerWidth-w-8), y=r.bottom+8; if(y+h>window.innerHeight-8) y=r.top-h-8;
+  tt.style.left=x+"px"; tt.style.top=y+"px"; }
+function hideTip(){ tt.style.display="none"; pinned=null; }
+document.addEventListener("mouseover",e=>{const el=e.target.closest("[data-tip]"); if(el) showTip(el);});
+document.addEventListener("mouseout",e=>{const el=e.target.closest("[data-tip]"); if(el&&el!==pinned&&!el.contains(e.relatedTarget)) tt.style.display="none";});
+document.addEventListener("focusin",e=>{const el=e.target.closest("[data-tip]"); if(el) showTip(el);});
+document.addEventListener("focusout",e=>{ if(e.target.closest("[data-tip]")) hideTip(); });
+document.addEventListener("click",e=>{const el=e.target.closest("[data-tip]");
+  if(el){ e.preventDefault(); e.stopPropagation(); if(pinned===el) hideTip(); else {pinned=el; showTip(el);} return; }
+  if(pinned) hideTip(); }, true);
+window.addEventListener("scroll",()=>{ if(tt.style.display==="block") hideTip(); },{passive:true});
+
+/* ===== 起動 ===== */
+try{ $("nojs").remove(); }catch(e){}
+function init(){
+  $("deadlineChip").innerHTML=`ご提出期限 <b>${CONFIG.deadline}</b>`; $("deadlineTxt").textContent=CONFIG.deadline;
+  $("cName").value=state.info.name||""; $("cTel").value=state.info.tel||"";
+  renderQ();
+}
+load(); init(); go(state.step||1);
+</script>
+</body>
+</html>
